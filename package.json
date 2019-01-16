@@ -1,0 +1,19 @@
+{
+  "name": "tbds",
+  "version": "1.0.0",
+  "description": "Transaction Based Database System",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pranay-K/TBDS.git"
+  },
+  "author": "PRANAY KATIYAR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pranay-K/TBDS/issues"
+  },
+  "homepage": "https://github.com/Pranay-K/TBDS#readme"
+}
