@@ -4,6 +4,9 @@
   "description": "Transaction Based Database System",
   "main": "index.js",
   "scripts": {
+    "babel-node": "babel-node --presets=env",
+    "start": "nodemon --exec npm run babel-node -- ./index.js",
+    "build": "babel src -d dist",
     "test": "test"
   },
   "repository": {
@@ -15,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/Pranay-K/TBDS/issues"
   },
-  "homepage": "https://github.com/Pranay-K/TBDS#readme"
+  "homepage": "https://github.com/Pranay-K/TBDS#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "sha256": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.3"
+  }
 }

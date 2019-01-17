@@ -1,7 +1,9 @@
-var crypto       = require('sha256');
+const crypto       = require('sha256');
+const config 		= require('./../config.json');
+const fs         = require('fs');
+const Chain		= require('./chain.js');
+var pool = [];
 class Transaction{
-	
-	let pool = [];
     constructor(){
     }
 	
@@ -13,20 +15,33 @@ class Transaction{
 		// Get Previous transaction Hash
 		// Create Transaction data
 		let transaction = {
-			'channelName' : 'default_channel',
+			'channelName' : config.channel,
 			'data': data,
 			'timestamp': new Date(),
-			'previousTransaction' : pool[pool.length - 1].transactionHeader
+			'previousTransaction' : pool.length > 0 ? pool[pool.length - 1].transactionHeader : config.genesis_transaction
 		}
 		
-		let transactionHeader = crypto(transaction);
+		let transactionHeader = crypto(JSON.stringify(transaction));
 		transaction.transactionHeader = transactionHeader;
 		pool.push(transaction);
+		//console.log(pool);
+		if(pool.length == 2){
+			let chain = new Chain();
+			chain.createBlock(pool);
+			this.clearPool();
+		}
+		
+		/*fs.writeFile('./data/'+transactionHeader, JSON.stringify(transaction), function (err) {
+		  if (err) throw err;
+		  console.log('Saved!');
+		});*/
 	}
 
-    
+    clearPool(){
+		pool = [];
+	}
 	
-	clearPool(){
+	createBlock(){
 	}
 }
 
