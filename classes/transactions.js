@@ -3,6 +3,7 @@ const config 		= require('./../config.json');
 const fs         = require('fs');
 const Chain		= require('./chain.js');
 var pool = [];
+var currentTransaction = 0;
 class Transaction{
     constructor(){
     }
@@ -17,15 +18,16 @@ class Transaction{
 		let transaction = {
 			'channelName' : config.channel,
 			'data': data,
-			'timestamp': new Date(),
-			'previousTransaction' : pool.length > 0 ? pool[pool.length - 1].transactionHeader : config.genesis_transaction
+			'timestamp': new Date()
+			//'previousTransaction' : pool.length > 0 ? pool[pool.length - 1].transactionHeader : config.genesis_transaction
 		}
 		
 		let transactionHeader = crypto(JSON.stringify(transaction));
+
 		transaction.transactionHeader = transactionHeader;
 		pool.push(transaction);
 		//console.log(pool);
-		if(pool.length == 2){
+		if(pool.length == config.max_transaction){
 			let chain = new Chain();
 			chain.createBlock(pool);
 			this.clearPool();

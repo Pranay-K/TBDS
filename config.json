@@ -1,4 +1,5 @@
 {
 	"channel": "default_channel",
-	"genesis_transaction": 	"0000"
+	"genesis_transaction": 	"0000",
+	"max_transaction": 5
 }
